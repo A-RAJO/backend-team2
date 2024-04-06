@@ -37,9 +37,9 @@ public class PostController {
     }
 
     //아이디와 게시물 번호로 게시물 업데이트
-    @PutMapping("/posts/{id}/{post_num}")
-    public Post updatedPost(@PathVariable String userId, int postNum, @RequestBody PostBody postBody) {
-        Post post = PostService.updatePost();
+    @PutMapping("/posts")
+    public Post updatedPost(@RequestParam String userId, @RequestParam int postNum, @RequestBody PostBody postBody) {
+        Post post = PostService.updatePost(userId, postNum);
         return post;
     }
 
