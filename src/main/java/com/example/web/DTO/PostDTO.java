@@ -1,4 +1,4 @@
-package com.example.web;
+package com.example.web.DTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @ToString
 public class PostDTO {
-    static int postNum;
+    private static int PostNum=1;
     private String userId;
     private String title;
     private String contents;
