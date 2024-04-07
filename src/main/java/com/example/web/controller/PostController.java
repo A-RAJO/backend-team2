@@ -20,49 +20,49 @@ public class PostController {
     //모든 게시물 조회
     @GetMapping("/posts")
     public List<Post> findAllPost(){
-        List<Post> posts=PostService.findAllPost();
+        List<Post> posts=postService.findAllPost();
         return posts;
     }
 
     //아이디로 게시물 조회
     @GetMapping("/posts/search/{id}")
     public List<Post> findPostById(@PathVariable String userId){
-        List<Post> posts=PostService.findPostById(userId);
+        List<Post> posts=postService.findPostById(userId);
         return posts;
     }
 
     //제목으로 게시물 조회
     @GetMapping("/posts/search")
     public List<Post> findPostByTitle(@RequestParam String title){
-        List<Post> posts=PostService.findPostByTitle(title);
+        List<Post> posts=postService.findPostByTitle(title);
         return posts;
     }
 
     //아이디+제목으로 게시물 조회
     @GetMapping("/posts/searches")
     public List<Post> findPostByTitleAndUserId(@RequestParam String title, String userId){
-        List<Post> posts=PostService.findPostByTitleAndUserId(title,userId);
+        List<Post> posts=postService.findPostByTitleAndUserId(title,userId);
         return posts;
     }
 
     //게시물 등록
     @PostMapping("/posts")
     public Post registerPost(@RequestBody PostBody postBody){
-        Post post=PostService.savePost(postBody);
+        Post post=postService.savePost(postBody);
         return post;
     }
 
     //게시물 번호로 게시물 업데이트
     @PutMapping("/posts")
-    public Post updatedPost(@RequestParam String userId, @RequestParam int postNum, @RequestBody PostBody postBody) {
-        Post post = PostService.updatePost(userId, postNum);
+    public Post updatedPost(@RequestParam int postNum, @RequestBody PostBody postBody) {
+        Post post = postService.updatePost(postNum,postBody);
         return post;
     }
 
     //게시물 번호로 게시물 삭제
     @DeleteMapping("/posts/{post_num}")
     public String deletedPost(@PathVariable int postNum){
-        PostService.deletePost(postNum);
+        postService.deletePost(postNum);
         return postNum+"번 게시물이 성공적으로 삭제되었습니다.";
     }
 }

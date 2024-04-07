@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 @ToString
-public class PostDTO {
+public class PostDto {
     private static int PostNum=1;
     private String userId;
     private String title;
