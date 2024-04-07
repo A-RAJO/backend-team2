@@ -1,4 +1,4 @@
-package com.example.web.controller;
+package com.example.web.controler;
 
 import com.example.repository.Entity.Post;
 import com.example.service.PostService;
