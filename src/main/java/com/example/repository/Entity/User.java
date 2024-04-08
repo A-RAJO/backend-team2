@@ -1,4 +1,4 @@
-package com.example.repository.Entity.Users;
+package com.example.repository.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,27 +1,34 @@
 package com.example.service;
 
-import com.example.repository.Entity.Posts.Posts;
-import com.example.repository.repositories.PostJpaRepository;
+import com.example.repository.Entity.Posts;
+import com.example.repository.repositories.JwtRepository;
+import com.example.repository.repositories.PostRepository;
+import com.example.repository.repositories.UserRepository;
+import com.example.security.JwtProvider;
+import com.example.web.DTO.PostBody;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@RequiredArgsConstructor
 @Service
 public class PostService {
 
-    private static PostJpaRepository postJpaRepository;
-    public static List<Posts> findAllPost() {
-        List<Posts> posts=postJpaRepository.findAll();
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final JwtProvider jwtProvider;
+    public List<Posts> findAllPost() {
+        List<Posts> posts= postRepository.findAll();
         return posts;
     }
 
     public static List<Posts> findPostById(String userId) {
-        List<Posts> posts=postJpaRepository.findAllById(userId);
-        return posts;
+
     }
 
     public static Posts savePost(PostBody postBody) {
-        Posts posts =postJpaRepository
+
+
     }
 
     public static Posts updatePost(int userId, Posts postNum) {

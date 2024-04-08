@@ -1,18 +1,15 @@
 package com.example.web.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserDto {
-    private String userId;
+@AllArgsConstructor
+public class Login {
+    private String Id;
     private String passWord;
-    private String userName;
-    private String phone;
-    private Timestamp createAt;
 }

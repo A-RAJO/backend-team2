@@ -1,4 +1,4 @@
-package com.example.repository.Entity.Posts;
+package com.example.repository.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

@@ -1,12 +1,12 @@
 package com.example.repository.repositories;
 
-import com.example.repository.Entity.Posts.Posts;
+import com.example.repository.Entity.Posts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface PostJpaRepository extends JpaRepository<Posts,Integer> {
+public interface PostRepository extends JpaRepository<Posts,Integer> {
     List<Posts> findAllById(String userId);
 }

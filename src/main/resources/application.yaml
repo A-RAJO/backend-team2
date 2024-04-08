@@ -13,3 +13,9 @@ logging:
             username: root
             password: 12341234
             driver-class-name: com.mysql.cj.jdbc.Driver
+jwt:
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWNyZXQiOiJiZS1maXJzdC1wcm9qZWN0LXNlY3JldCJ9.pqAbZY3rm1ca3DoarLPgBWUkVBoJC_B7ckMWcUu7WdI
+
+  access:
+    expriation: 1000*60*60
+    header: Authorization
