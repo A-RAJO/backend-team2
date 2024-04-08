@@ -1,9 +1,6 @@
 package com.example.web.DTO;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.sql.Timestamp;
@@ -11,8 +8,9 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
-public class PostDto {
+@AllArgsConstructor
+
+public class PostRequest {
     private static int PostNum=1;
     private String userId;
     private String title;
