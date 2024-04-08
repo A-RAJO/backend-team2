@@ -1,6 +1,5 @@
 package com.example.security;
 
-import com.example.security.JwtProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -14,7 +13,7 @@ import org.springframework.web.filter.GenericFilterBean;
 import java.io.IOException;
 
 @RequiredArgsConstructor
-public class TokenFilter extends GenericFilterBean {
+public class JwtTokenFilter extends GenericFilterBean {
 
     private final JwtProvider jwtProvider;
 

@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.security.JwtAuthenticationFilter;
 import com.example.security.JwtProvider;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -20,51 +21,16 @@ public class WebSecurityConfig {
     private final JwtProvider jwtProvider;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.authorizeHttpRequests()
-                .requestMatchers("/user/**").authenticated()
-                .requestMatchers("/manager/**").hasAnyRole("MANAGER", "ADMIN")
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().permitAll()
-                .and().formLogin().loginPage("/login");
-
-        return http.build();
-    }
-
+    SecurityFilterChain filterChain(HttpSecurity http)
 
     //암호화에 필요한 PasswordEncoder Bean 등록
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     //authenticationManager Bean 등록
     @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public AuthenticationManager authenticationManagerBean() throws Exception{
     }
 
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                //h2 콘솔 사용
-                .csrf().disable().headers().frameOptions().disable()
-                .and()
-
-                //세션 사용 안함
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-
-                //URL 관리
-                .authorizeRequests()
-                .antMatchers("/join", "/login", "/h2-console/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-
-                // JwtAuthenticationFilter를 먼저 적용
-                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);}
-
-
-
-    }
 }

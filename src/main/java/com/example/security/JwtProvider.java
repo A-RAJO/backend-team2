@@ -1,14 +1,11 @@
 package com.example.security;
 
-import com.example.repository.Entity.User;
 import com.example.repository.repositories.PostRepository;
 import com.example.repository.repositories.UserRepository;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.Entity;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,7 +38,6 @@ public class JwtProvider {
     private long tokenValidTime = 1000L*60*60;     // 토큰 유효시간 30분
 
 
-
     // 객체 초기화, secretKey를 Base64로 인코딩
     @PostConstruct
     protected void init() {
@@ -50,7 +46,7 @@ public class JwtProvider {
 
 
     @GetMapping("/api/register_token")
-    private TokenInfo RegisterToken(Authentication authentication){
+    private JwtTokenInfo RegisterToken(Authentication authentication){
 
         Date now = new Date();
 
@@ -62,7 +58,7 @@ public class JwtProvider {
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
-        return new TokenInfo("Bearer", jwt);
+        return new JwtTokenInfo("Bearer", jwt);
     }
     // 인증 정보 조회
     public Authentication getAuthentication(String token) {

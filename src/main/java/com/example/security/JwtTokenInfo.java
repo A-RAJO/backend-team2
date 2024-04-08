@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
-public class TokenInfo {
+public class JwtTokenInfo {
     String grantType;
     String accessToken;
 }

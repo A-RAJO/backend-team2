@@ -1,7 +1,12 @@
 package com.example.security;
 
+import com.example.repository.Entity.User;
+import com.example.web.DTO.PostBody;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,25 +14,11 @@ import java.sql.Timestamp;
 import java.util.Collection;
 
 @Getter
-@Entity
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserDetail implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "user_id", nullable = false)
-    private String Id;
-
-    @Column(name = "pass_word", nullable = false)
-    private String passWord;
-
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-
-    @Column(name = "phone", nullable = false)
-    private String phone;
-
-    @Column(name = "created_at")
-    private Timestamp createAt;
+    private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -36,31 +27,31 @@ public class UserDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return user.getPassWord();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return user.getUserName();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
