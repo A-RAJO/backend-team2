@@ -1,9 +1,6 @@
-package com.example.web.controler;
+package com.example.web.controller;
 
 import com.example.service.UserService;
-import com.example.web.dto.AuthInfo;
-import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +9,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/users")
-@RequiredArgsConstructor
-public class UserController {
+@RequiredArgsConstructorpublic class UserController {
     private final UserService userService;
 
     @PostMapping

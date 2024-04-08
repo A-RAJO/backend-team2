@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -16,13 +17,13 @@ import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = {"com.example.repository"},
+        basePackages = {"com.example.repository.repositories"},
         entityManagerFactoryRef = "localContainerEntityManagerFactoryBean",
         transactionManagerRef = "tmJpa"
 )
 public class JpaConfig {
     @Bean
-    public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean(DataSource dataSource){
+    public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean(@Qualifier(dataSource) DataSource dataSource){
         LocalContainerEntityManagerFactoryBean em=new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
         em.setPackagesToScan("com.example.repository");
@@ -40,7 +41,7 @@ public class JpaConfig {
 
     }
     @Bean(name = "tmJpa")
-    public PlatformTransactionManager transactionManager(@Qualifier(datasource) DataSource dataSource){
+    public PlatformTransactionManager transactionManager(@Qualifier(DataSource) DataSource dataSource){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(localContainerEntityManagerFactoryBean(dataSource).getObject());
         return transactionManager;

@@ -1,8 +1,7 @@
-package com.example.web.controler;
+package com.example.web.controller;
 
-import com.example.repository.Entity.Post;
+import com.example.repository.Entity.Posts.Posts;
 import com.example.service.PostService;
-import com.example.web.PostBody;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -19,44 +18,44 @@ public class PostController {
 
     //모든 게시물 조회
     @GetMapping("/posts")
-    public List<Post> findAllPost(){
-        List<Post> posts=postService.findAllPost();
+    public List<Posts> findAllPost(){
+        List<Posts> posts=postService.findAllPost();
         return posts;
     }
 
     //아이디로 게시물 조회
     @GetMapping("/posts/search/{id}")
-    public List<Post> findPostById(@PathVariable String userId){
-        List<Post> posts=postService.findPostById(userId);
+    public List<Posts> findPostById(@PathVariable String userId){
+        List<Posts> posts=postService.findPostById(userId);
         return posts;
     }
 
     //제목으로 게시물 조회
     @GetMapping("/posts/search")
-    public List<Post> findPostByTitle(@RequestParam String title){
-        List<Post> posts=postService.findPostByTitle(title);
+    public List<Posts> findPostByTitle(@RequestParam String title){
+        List<Posts> posts=postService.findPostByTitle(title);
         return posts;
     }
 
     //아이디+제목으로 게시물 조회
     @GetMapping("/posts/searches")
-    public List<Post> findPostByTitleAndUserId(@RequestParam String title, String userId){
-        List<Post> posts=postService.findPostByTitleAndUserId(title,userId);
+    public List<Posts> findPostByTitleAndUserId(@RequestParam String title, String userId){
+        List<Posts> posts=postService.findPostByTitleAndUserId(title,userId);
         return posts;
     }
 
     //게시물 등록
     @PostMapping("/posts")
-    public Post registerPost(@RequestBody PostBody postBody){
-        Post post=postService.savePost(postBody);
-        return post;
+    public Posts registerPost(@RequestBody PostBody postBody){
+        Posts posts =postService.savePost(postBody);
+        return posts;
     }
 
     //게시물 번호로 게시물 업데이트
     @PutMapping("/posts")
-    public Post updatedPost(@RequestParam int postNum, @RequestBody PostBody postBody) {
-        Post post = postService.updatePost(postNum,postBody);
-        return post;
+    public Posts updatedPost(@RequestParam int postNum, @RequestBody PostBody postBody) {
+        Posts posts = postService.updatePost(postNum,postBody);
+        return posts;
     }
 
     //게시물 번호로 게시물 삭제

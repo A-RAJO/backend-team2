@@ -6,3 +6,10 @@ logging:
     org:
       hibernate:
         SQL: DEBEG
+
+        spring:
+          datasource:
+            url: jdbc:mysql://127:0:0:1:8080/?user=root/lookbook?serverTimezone=UTC&characterEncoding=UTF-8
+            username: root
+            password: 12341234
+            driver-class-name: com.mysql.cj.jdbc.Driver

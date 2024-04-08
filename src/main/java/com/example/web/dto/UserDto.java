@@ -1,4 +1,4 @@
-package com.example.web.dto;
+package com.example.web.DTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 public class UserDto {
     private String userId;
     private String passWord;
-    private String name;
-    private String phoneNum;
+    private String userName;
+    private String phone;
     private Timestamp createAt;
 }
