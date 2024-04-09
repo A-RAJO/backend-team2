@@ -36,15 +36,15 @@ public class User implements UserDetails {
     private String phone;
 
     @Column(name = "created_at")
-    private Timestamp createAt;
+    private Timestamp createdAt;
 
     @Builder
-    public User (String userId, String passWord, String userName, String phone, Timestamp createAt) {
+    public User (String userId, String passWord, String userName, String phone, Timestamp createdAt) {
         this.userId = userId;
         this.passWord = passWord;
         this.userName = userName;
         this.phone = phone;
-        this.createAt = createAt;
+        this.createdAt = createdAt;
     }
 
     @Override

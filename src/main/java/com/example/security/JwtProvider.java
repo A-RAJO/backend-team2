@@ -1,18 +1,15 @@
 package com.example.security;
 
-import com.example.repository.repositories.PostRepository;
-import com.example.repository.repositories.UserRepository;
+import com.example.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -25,47 +22,39 @@ import java.util.Date;
 //검증된 JWT 토큰에서 사용자 정보 조회 및 가져오기
 
 @Getter
-@AllArgsConstructor
 @Component
+@RequiredArgsConstructor
 @Builder
 public class JwtProvider {
 
-    private final PostRepository postRepository;
-    private final UserRepository userRepository;
-    private final UserDetailsService userDetailsService;
-
-    @Value("${jwt.secret}")
     private String secretKey;
+    private UserService userDetailsService;
 
-    private long tokenValidTime = 1000L*60*60;     // 토큰 유효시간 30분
-
-
-    // 객체 초기화, secretKey를 Base64로 인코딩
-    @PostConstruct
-    protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+    //yaml 파일의 secretkey 암호화
+    public String encoding(@Value("${jwt.secret_key_source}") String secretKey) {
+        return this.secretKey=Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
-
+    //토큰 유효기간
+    private long tokenValidTime = 1000L*60*60;
 
     //jwt토큰 발급하기
-    @GetMapping("/api/register_token")
-    private JwtTokenInfo RegisterToken(Authentication authentication){
+    private JwtTokenDto RegisterToken(Authentication authentication){
 
         Date now = new Date();
 
         String jwt = Jwts.builder()
                 .setSubject(String.valueOf(authentication))
-                .claim("auth", authentication)
                 .setIssuedAt(now)
+                .claim("auth", authentication)
                 .setExpiration(new Date(now.getTime() + tokenValidTime))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .signWith(SignatureAlgorithm.HS256,secretKey)
                 .compact();
 
-        return new JwtTokenInfo("Bearer", jwt);
+        return new JwtTokenDto("Bearer", jwt);
     }
 
-
     // 인증 정보 조회
+    //UserDetail=User
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());

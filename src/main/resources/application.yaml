@@ -14,4 +14,4 @@ datasource:
 
 
 jwt:
-  secret-key-source: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZWNyZXQiOiJiZS1maXJzdC1wcm9qZWN0LXNlY3JldCJ9.pqAbZY3rm1ca3DoarLPgBWUkVBoJC_B7ckMWcUu7WdI
+  secret_key_source: ourFirstProject

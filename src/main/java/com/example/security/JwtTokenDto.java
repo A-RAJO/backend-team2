@@ -3,11 +3,12 @@ package com.example.security;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtTokenInfo {
+public class JwtTokenDto {
     String grantType;
     String accessToken;
 }
