@@ -8,6 +8,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +34,8 @@ public class JwtProvider {
     private final UserRepository userRepository;
     private final UserDetailsService userDetailsService;
 
-    private String secretKey = "webfirewood";
+    @Value("${jwt.secret}")
+    private String secretKey;
 
     private long tokenValidTime = 1000L*60*60;     // 토큰 유효시간 30분
 
@@ -45,6 +47,7 @@ public class JwtProvider {
     }
 
 
+    //jwt토큰 발급하기
     @GetMapping("/api/register_token")
     private JwtTokenInfo RegisterToken(Authentication authentication){
 
@@ -60,6 +63,8 @@ public class JwtProvider {
 
         return new JwtTokenInfo("Bearer", jwt);
     }
+
+
     // 인증 정보 조회
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
@@ -86,6 +91,5 @@ public class JwtProvider {
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("X-AUTH-TOKEN");
     }
-
 
 }

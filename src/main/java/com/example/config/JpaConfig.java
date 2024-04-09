@@ -1,10 +1,13 @@
 package com.example.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -15,18 +18,33 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
+
 @EnableJpaRepositories(
         basePackages = {"com.example.repository.repositories"},
         entityManagerFactoryRef = "localContainerEntityManagerFactoryBean",
         transactionManagerRef = "tmJpa"
 )
+
+@Configuration
+@RequiredArgsConstructor
 public class JpaConfig {
+
+    private final DataSourceProperties dataSourceProperties;
+
     @Bean
-    public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean(@Qualifier(dataSource) DataSource dataSource){
+    public DataSource datasource(){
+        DriverManagerDataSource datasource = new DriverManagerDataSource();
+        datasource.setUsername(dataSourceProperties.getUsername());
+        datasource.setPassword(dataSourceProperties.getPassword());
+        datasource.setDriverClassName(dataSourceProperties.getDriverClassName());
+        datasource.setUrl(dataSourceProperties.getUrl());
+        return datasource;
+    }
+    @Bean
+    public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean(DataSource datasource){
         LocalContainerEntityManagerFactoryBean em=new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource);
-        em.setPackagesToScan("com.example.repository");
+        em.setDataSource(datasource);
+        em.setPackagesToScan("com.example.repository.repositories");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -41,9 +59,13 @@ public class JpaConfig {
 
     }
     @Bean(name = "tmJpa")
-    public PlatformTransactionManager transactionManager(@Qualifier(DataSource) DataSource dataSource){
+    public PlatformTransactionManager transactionManager(DataSource datasource){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(localContainerEntityManagerFactoryBean(dataSource).getObject());
+        transactionManager.setEntityManagerFactory(localContainerEntityManagerFactoryBean(datasource).getObject());
         return transactionManager;
     }
 }
+
+
+
+

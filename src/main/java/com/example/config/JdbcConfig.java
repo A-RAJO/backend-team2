@@ -20,22 +20,21 @@ public class JdbcConfig {
     private final DataSourceProperties dataSourceProperties;
 
     @Bean
-    public DataSource dataSource(){
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUsername(dataSourceProperties.getUsername());
-        dataSource.setPassword(dataSourceProperties.getPassword());
-        dataSource.setDriverClassName(dataSourceProperties.getDriverClassName());
-        dataSource.setUrl(dataSourceProperties.getUrl());
-        return dataSource;
+    public DataSource datasource(){
+        DriverManagerDataSource datasource = new DriverManagerDataSource();
+        datasource.setUsername(dataSourceProperties.getUsername());
+        datasource.setPassword(dataSourceProperties.getPassword());
+        datasource.setDriverClassName(dataSourceProperties.getDriverClassName());
+        datasource.setUrl(dataSourceProperties.getUrl());
+        return datasource;
     }
 
 
-
     @Bean
-    public JdbcTemplate jdbcTemplate() { return new JdbcTemplate(dataSource()); }
+    public JdbcTemplate jdbcTemplate() { return new JdbcTemplate(datasource()); }
 
 
     @Bean(name = "tm1")
-    public PlatformTransactionManager transactionManager() { return new DataSourceTransactionManager(dataSource()); }
+    public PlatformTransactionManager transactionManager() { return new DataSourceTransactionManager(datasource()); }
 
 }
