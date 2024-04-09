@@ -1,13 +1,13 @@
-package com.example.backendfirstprojectteam2;
+package com.example.baFirstProjectTeam02;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendFirstProjectTeam2Application {
+public class beFirstProjectTeam02Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(BackendFirstProjectTeam2Application.class, args);
+        SpringApplication.run(beFirstProjectTeam02Application.class, args);
     }
 
 }
