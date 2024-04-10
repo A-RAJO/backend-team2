@@ -1,0 +1,12 @@
+server:
+  port: 8080
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+spring:
+  jpa:
+    open-in-view: false
+jwt:
+  secret_key_source: ourFirstProject

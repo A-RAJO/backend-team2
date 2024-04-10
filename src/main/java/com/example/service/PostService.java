@@ -1,7 +1,6 @@
 package com.example.service;
 
 import com.example.repository.Entity.Posts;
-import com.example.repository.repositories.JwtRepository;
 import com.example.repository.repositories.PostRepository;
 import com.example.repository.repositories.UserRepository;
 import com.example.security.JwtProvider;
@@ -23,23 +22,30 @@ public class PostService {
     }
 
     public static List<Posts> findPostById(String userId) {
-
+        return null;
     }
 
     public static Posts savePost(PostBody postBody) {
-
+        return null;
 
     }
 
     public static Posts updatePost(int userId, Posts postNum) {
+        return null;
+
     }
 
     public static Posts deletePost(int postNum) {
+        return null;
     }
 
     public static List<Posts> findPostByTitle(String title) {
+        return null;
+
     }
 
     public static List<Posts> findPostByTitleAndUserId(String title, String userId) {
+        return null;
+
     }
 }

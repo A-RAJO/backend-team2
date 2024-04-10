@@ -2,21 +2,14 @@ package com.example.repository.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@RequiredArgsConstructor
 @ToString
 @Entity
 public class User implements UserDetails {
@@ -39,7 +32,8 @@ public class User implements UserDetails {
     private Timestamp createdAt;
 
     @Builder
-    public User (String userId, String passWord, String userName, String phone, Timestamp createdAt) {
+
+    public User(String userId, String passWord, String userName, String phone, Timestamp createdAt) {
         this.userId = userId;
         this.passWord = passWord;
         this.userName = userName;

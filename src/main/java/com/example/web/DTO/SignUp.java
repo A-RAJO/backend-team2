@@ -5,8 +5,6 @@ import org.springframework.security.core.userdetails.User;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@RequiredArgsConstructor
 public class SignUp {
 
     private String userId;

@@ -59,7 +59,7 @@ public class PostController {
     //게시물 번호로 게시물 업데이트(로그인 후 이용가능)
     @PutMapping("/posts")
     public Posts updatedPost(@RequestParam int postNum, @RequestBody PostBody postBody) {
-        Posts posts = postService.updatePost(postNum,postBody);
+        Posts posts = postService.updatePost(postNum,new Posts());
         return posts;
     }
 
