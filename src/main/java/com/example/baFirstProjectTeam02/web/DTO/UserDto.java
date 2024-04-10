@@ -5,6 +5,7 @@ import lombok.*;
 
 @Getter
 @Setter
+@Builder
 public class UserDto {
 
     private String userId;
@@ -12,13 +13,6 @@ public class UserDto {
     private String userName;
     private String phone;
 
-    @Builder
-    public UserDto(String userId, String password, String userName, String phone) {
-        this.userId = userId;
-        this.password = password;
-        this.userName = userName;
-        this.phone = phone;
-    }
 
     public User toEntity(UserDto userDto){
         return com.example.baFirstProjectTeam02.repository.Entity.User.builder()
