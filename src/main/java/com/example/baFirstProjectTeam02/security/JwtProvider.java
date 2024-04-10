@@ -32,7 +32,6 @@ public class JwtProvider {
     private UserService userDetailsService;
 
     //yaml 파일의 secretkey 암호화
-    @Qualifier("getUserPk")
     @Value("${jwt.secret_key_source}")
         private String secretKey;
     @PostConstruct
@@ -55,24 +54,18 @@ public class JwtProvider {
                 .compact();
     }
 
-    // 인증 정보 조회
-    //UserDetail=User
+    //
     @Bean
-    public Authentication getAuthentication(@Qualifier("getUserPk") String token) {
+    public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(token);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
 
-    // 토큰에서 회원 정보 추출
-    @Bean
-    public String getUserPk(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
-    }
 
     // 토큰 유효성, 만료일자 확인
     @Bean
-    public boolean validateToken(@Qualifier("getUserPk") String token) {
+    public boolean validateToken(String token) {
         try {
             Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
             return !claims.getExpiration().before(new Date());

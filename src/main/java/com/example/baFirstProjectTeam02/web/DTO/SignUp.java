@@ -12,5 +12,7 @@ public class SignUp {
     private String userName;
     private String phone;
 
+    @Builder
+    public UserSaveRequestDto(String )
 
 }

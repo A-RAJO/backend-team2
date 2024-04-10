@@ -28,6 +28,7 @@ import java.sql.Timestamp;
 @Service
 public class UserService implements UserDetailsService {
 
+
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
@@ -49,6 +50,7 @@ public class UserService implements UserDetailsService {
 
         return "회원가입이 완료되었습니다.";
     }
+    @Transactional
     public String login(Login login) throws NotAcceptException {
         String userId=login.getUserId();
         String password=login.getPassWord();
