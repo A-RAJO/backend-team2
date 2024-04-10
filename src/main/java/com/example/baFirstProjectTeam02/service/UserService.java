@@ -1,16 +1,13 @@
 package com.example.baFirstProjectTeam02.service;
 
-import com.example.baFirstProjectTeam02.web.DTO.Login;
-import com.example.baFirstProjectTeam02.web.DTO.SignUp;
+import com.example.baFirstProjectTeam02.web.DTO.UserDto;
 import com.example.baFirstProjectTeam02.repository.Entity.User;
 import com.example.baFirstProjectTeam02.repository.UserRepository;
 import com.example.baFirstProjectTeam02.security.JwtProvider;
-import com.example.baFirstProjectTeam02.security.token;
 import com.example.baFirstProjectTeam02.web.Exception.NotAcceptException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -35,25 +32,25 @@ public class UserService implements UserDetailsService {
 
 
     @Transactional
-    public String signup(SignUp signUp){
-        if (userRepository.existsByUserId(signUp.getUserId())) {
+    public String signup(UserDto userDto){
+        if (userRepository.existsByUserId(userDto.getUserId())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
         Timestamp now=new Timestamp(System.currentTimeMillis());
         User user= User.builder()
-                .userId(signUp.getUserId())
-                .passWord(passwordEncoder.encode(signUp.getPassword()))
-                .userName(signUp.getUserName())
-                .phone(signUp.getPhone())
+                .userId(userDto.getUserId())
+                .passWord(passwordEncoder.encode(userDto.getPassword()))
+                .userName(userDto.getUserName())
+                .phone(userDto.getPhone())
                 .createdAt(now)
                 .build();
 
         return "회원가입이 완료되었습니다.";
     }
     @Transactional
-    public String login(Login login) throws NotAcceptException {
+    public String login(UserDto login) throws NotAcceptException {
         String userId=login.getUserId();
-        String password=login.getPassWord();
+        String password=login.getPassword();
 
         try {
             Authentication authentication= jwtProvider.getAuthentication(
