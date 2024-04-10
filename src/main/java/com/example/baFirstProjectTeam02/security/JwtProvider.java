@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,13 +32,13 @@ public class JwtProvider {
     private UserService userDetailsService;
 
     //yaml 파일의 secretkey 암호화
-   @Value("${jwt.secret_key_source}")
-        private String secretKeySource;
+    @Qualifier("getUserPk")
+    @Value("${jwt.secret_key_source}")
         private String secretKey;
     @PostConstruct
     public void setUp() {
         secretKey = Base64.getEncoder()
-                .encodeToString(secretKeySource.getBytes());
+                .encodeToString(secretKey.getBytes());
     }
 
     //jwt토큰 발급하기
@@ -57,7 +58,7 @@ public class JwtProvider {
     // 인증 정보 조회
     //UserDetail=User
     @Bean
-    public Authentication getAuthentication(String token) {
+    public Authentication getAuthentication(@Qualifier("getUserPk") String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(token);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
@@ -71,9 +72,9 @@ public class JwtProvider {
 
     // 토큰 유효성, 만료일자 확인
     @Bean
-    public boolean validateToken(String jwtToken) {
+    public boolean validateToken(@Qualifier("getUserPk") String token) {
         try {
-            Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken).getBody();
+            Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
             return !claims.getExpiration().before(new Date());
         } catch (Exception e) {
             return false;

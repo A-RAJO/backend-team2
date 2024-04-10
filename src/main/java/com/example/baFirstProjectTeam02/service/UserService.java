@@ -63,7 +63,7 @@ public class UserService implements UserDetailsService {
             User user = userRepository.findByUserId(userId)
                     .orElseThrow(() -> new NotFoundException());
 
-            return jwtProvider.createToken(userId);
+            return jwtProvider.createToken(userId)+"로그인 성공하였습니다.";
 
         } catch (Exception e){
             e.printStackTrace();
