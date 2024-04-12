@@ -28,7 +28,6 @@ public class SecurityConfiguration {
                 .httpBasic().disable()
                 .rememberMe().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
         return http.build();
     }
 
