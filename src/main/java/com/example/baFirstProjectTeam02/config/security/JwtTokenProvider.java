@@ -22,8 +22,6 @@ public class JwtTokenProvider {
     private final String secretKey = Base64.getEncoder()
             .encodeToString("beFirstProjectTeam02".getBytes());
 
-    private long tokenValidMillisecond = 1000L * 60 * 60; // 1시간
-
     private final UserDetailsService userDetailsService;
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("X-AUTH-TOKEN");
@@ -34,6 +32,8 @@ public class JwtTokenProvider {
                 .setSubject(email);
         claims.put("roles", roles);
         Date now = new Date();
+        // 1시간
+        long tokenValidMillisecond = 1000L * 60 * 60;
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)

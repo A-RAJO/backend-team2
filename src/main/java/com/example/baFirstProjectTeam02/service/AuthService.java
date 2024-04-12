@@ -52,7 +52,7 @@ public class AuthService {
 
         //UserName password 등록, 기본 role_user
         Roles roles = rolesRepository.findByName("ROLE_USER")
-                .orElseThrow(() -> new NotFoundException("ROLE_USER를 찾을 수가 없습니다."));
+                .orElseThrow(() -> new NotFoundException("ROLE_USER 를 찾을 수가 없습니다."));
         UserPrincipal userPrincipal = UserPrincipal.builder()
                 .email(email)
                 .user(userFound)
@@ -81,7 +81,7 @@ public class AuthService {
                     .setAuthentication(authentication);
 
             UserPrincipal userPrincipal = userPrincipalRepository.findByEmailFetchJoin(email)
-                    .orElseThrow(() -> new NotFoundException("UserPrincipal을 찾을 수 없습니다."));
+                    .orElseThrow(() -> new NotFoundException("UserPrincipal 을 찾을 수 없습니다."));
 
             List<String> roles = userPrincipal.getUserPrincipalRoles()
                     .stream()

@@ -13,12 +13,13 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "users")
 public class UserEntity {
-    @Id @Column(name = "user_id")
+    @Id @Column(name = "user_id")@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
     @Column(name = "user_name", length = 20)
     private String userName;
-    @Column(name = "phone_num", length = 11)
+    @Column(name = "phone_num", length = 30)
     private String phoneNum;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

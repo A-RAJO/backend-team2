@@ -31,10 +31,13 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     // security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.2.0'
+    implementation 'org.springframework.security:spring-security-config:6.0.0'
+    implementation 'org.springframework.security:spring-security-web:6.0.0'
     // Mapstruct
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
 
 }
 
