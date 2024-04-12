@@ -13,7 +13,9 @@ import com.example.baFirstProjectTeam02.service.exceptions.NotAcceptException;
 import com.example.baFirstProjectTeam02.service.exceptions.NotFoundException;
 import com.example.baFirstProjectTeam02.web.dto.auth.Login;
 import com.example.baFirstProjectTeam02.web.dto.auth.SignUp;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,9 +35,11 @@ public class AuthService {
     private final UserRepository userRepository;
     private final RolesRepository rolesRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserPrincipalRolesRepository userPrincipalRolesRepository;
-    private final AuthenticationManager authenticationManager;
 
+    private final AuthenticationManager authenticationManager;
+    private final UserPrincipalRolesRepository userPrincipalRolesRepository;
+
+    @Transactional
     public boolean signUp(SignUp signUpRequest) {
         String email = signUpRequest.getEmail();
         String password = signUpRequest.getPassword();
