@@ -13,5 +13,5 @@ public interface PostMapper {
 
     // 메소드
     PostDto postEntityToPostDto(Posts postEntity);
-    Posts emailAndPostbodyToPostEntity(String email, Postbody postBody);
+    Posts postbodyToPostEntity(Postbody postBody);
 }

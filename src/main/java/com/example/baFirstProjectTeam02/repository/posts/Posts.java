@@ -39,6 +39,9 @@ public class Posts {
     @Column(name = "updated_at", nullable = false)
     private Timestamp updatedAt;
 
-    public void setPostBody(Postbody postbody) {
+    public void setPostbody(Postbody postbody) {
+        this.userId=postbody.getUserId();
+        this.postTitle=postbody.getPostTitle();
+        this.postContents=postbody.getPostContents();
     }
 }

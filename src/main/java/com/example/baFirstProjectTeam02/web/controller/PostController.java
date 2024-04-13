@@ -32,7 +32,7 @@ public class PostController {
 
 
     //게시물 등록
-    @PostMapping("/posts")
+    @PostMapping("/posts/register")
     public String registerPost(@RequestBody Postbody postbody){
         Integer postNum=postService.savePost(postbody);
         return postNum+"번 게시물이 등록되었습니다.";

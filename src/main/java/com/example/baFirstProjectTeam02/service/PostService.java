@@ -39,7 +39,7 @@ public class PostService {
     }
 
     public Integer savePost(Postbody postbody) {
-        Posts postEntity=PostMapper.INSTANCE.emailAndPostbodyToPostEntity(null,postbody);
+        Posts postEntity=PostMapper.INSTANCE.postbodyToPostEntity(postbody);
         Posts postEntityCreated;
         try {
             postEntityCreated = postRepository.save(postEntity);
@@ -52,8 +52,8 @@ public class PostService {
     @Transactional
     public PostDto updatePost(int postNum, Postbody postbody) {
         Posts postEntityUpdated= postRepository.findByPostNum(postNum);
-                //.orElseThrow(() -> new NotFoundException("해당 ID: " + postNum + "의 Item을 찾을 수 없습니다."));
-        postEntityUpdated.setPostBody(postbody);
+//                .orElseThrow(() -> new NotFoundException("해당 ID: " + postNum + "의 Item을 찾을 수 없습니다."));
+        postEntityUpdated.setPostbody(postbody);
         return PostMapper.INSTANCE.postEntityToPostDto(postEntityUpdated);
     }
 }
