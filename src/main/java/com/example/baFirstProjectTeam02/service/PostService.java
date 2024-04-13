@@ -27,12 +27,14 @@ public class PostService {
         if(postEntity.isEmpty()) throw new NotFoundException("등록된 게시물이 없습니다.");
         return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
     }
-    public static List<PostDto> findPostByEmail(String email) {
-        return null;
+    public List<PostDto> findByEmail(String email) {
+        List<Posts> postEntity=postRepository.findByEmail();
+        return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
     }
 
-    public static PostDto findPostByTitle(String title) {
-        return null;
+    public List<PostDto> findByTitle(String title) {
+        List<Posts> postEntity=postRepository.findByTitle();
+        return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
     }
 
     public void deletePost(int postNum) {

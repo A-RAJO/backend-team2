@@ -27,16 +27,14 @@ public class PostController {
 
     //제목으로 게시물 조회
     @GetMapping("/posts/search")
-    public PostDto findPostByTitle(@RequestParam("title") String title){
-        PostDto post=PostService.findPostByTitle(title);
-        return post;
+    public List<PostDto> findPostByTitle(@RequestParam("title") String title){
+        return postService.findByTitle(title);
     }
 
     //이메일로 게시물 조회
     @GetMapping("/posts/search")
-    public PostDto findPostByEmail(@RequestParam("email") String email){
-        List<PostDto> posts=PostService.findPostByEmail(email);
-        return (PostDto) posts;
+    public List<PostDto> findPostByEmail(@RequestParam("email") String email){
+        return postService.findByEmail(email);
     }
 
     //게시물 등록
@@ -56,7 +54,6 @@ public class PostController {
     //게시물 번호로 게시물 수정
     @PutMapping("/posts/{post_num}")
     public PostDto updatePost(@PathVariable int postNum, @RequestBody Postbody postbody){
-        PostDto updatePost=postService.updatePost(postNum,postbody);
-        return updatePost;
+        return postService.updatePost(postNum,postbody);
     }
 }

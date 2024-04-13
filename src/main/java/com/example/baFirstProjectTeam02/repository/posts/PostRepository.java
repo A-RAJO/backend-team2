@@ -1,5 +1,6 @@
 package com.example.baFirstProjectTeam02.repository.posts;
 
+import com.example.baFirstProjectTeam02.web.dto.PostDto;
 import com.example.baFirstProjectTeam02.web.dto.Postbody;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,8 @@ public interface PostRepository extends JpaRepository<Posts, Integer> {
     Posts findByPostNum(int postNum);
 
     static void deletePost(int postNum){};
+
+    List<Posts> findByEmail();
+
+    List<Posts> findByTitle();
 }
