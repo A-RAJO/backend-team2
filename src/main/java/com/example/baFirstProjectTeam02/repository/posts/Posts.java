@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "post_num")
+@EqualsAndHashCode(of = "postNum")
 @ToString
 @Builder
 @Entity
@@ -19,7 +19,7 @@ public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "post_num", nullable = false)
-    private int post_num;
+    private int postNum;
 
     @Column(name = "user_id", nullable = false)
     private int userId;
@@ -28,7 +28,7 @@ public class Posts {
     private String postTitle;
 
     @Column(name = "post_contents", nullable = false)
-    private String post_contents;
+    private String postContents;
 
 //    @Column(name = "image", nullable = false)
 //    private String image;

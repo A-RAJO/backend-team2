@@ -16,10 +16,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@Service
 @RequiredArgsConstructor
 @Slf4j
+@Service
 public class PostService {
+
     private final PostRepository postRepository;
 
     public List<PostDto> findAllPost() {
@@ -27,13 +28,9 @@ public class PostService {
         if(postEntity.isEmpty()) throw new NotFoundException("등록된 게시물이 없습니다.");
         return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
     }
-    public List<PostDto> findByEmail(String email) {
-        List<Posts> postEntity=postRepository.findByEmail();
-        return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
-    }
 
     public List<PostDto> findByTitle(String title) {
-        List<Posts> postEntity=postRepository.findByTitle();
+        List<Posts> postEntity=postRepository.findByPostTitle(title);
         return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
     }
 
@@ -49,7 +46,7 @@ public class PostService {
         } catch (RuntimeException exception){
             throw new NotAcceptException("Post을 저장하는 도중에 Error 가 발생하였습니다.");
         }
-        return postEntityCreated.getPost_num();
+        return postEntityCreated.getPostNum();
     }
 
     @Transactional

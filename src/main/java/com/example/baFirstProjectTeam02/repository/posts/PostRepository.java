@@ -11,14 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface PostRepository extends JpaRepository<Posts, Integer> {
-//    List<Posts> findAllPost();
-//    List<Posts> findByEmail(List<String> email);
-//    Posts updatePost(int postNum, Postbody postbody);
+
+    static void deletePost(int postNum) {
+    }
     Posts findByPostNum(int postNum);
 
-    static void deletePost(int postNum){};
-
-    List<Posts> findByEmail();
-
-    List<Posts> findByTitle();
+    List<Posts> findByPostTitle(String title);
 }

@@ -1,5 +1,6 @@
 package com.example.baFirstProjectTeam02.config;
 
+import com.example.baFirstProjectTeam02.repository.posts.PostRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -18,7 +19,8 @@ import java.util.Map;
 @EnableJpaRepositories(
         basePackages = {"com.example.baFirstProjectTeam02.repository.users",
                 "com.example.baFirstProjectTeam02.repository.roles",
-                "com.example.baFirstProjectTeam02.repository.userPrincipal"},
+                "com.example.baFirstProjectTeam02.repository.userPrincipal",
+                "com.example.baFirstProjectTeam02.repository.posts"},
         entityManagerFactoryRef = "entityMangerFactoryBean",
         transactionManagerRef = "tmJpa"
 )
@@ -30,7 +32,8 @@ public class JpaConfig {
         em.setDataSource(dataSource);
         em.setPackagesToScan("com.example.baFirstProjectTeam02.repository.users",
                 "com.example.baFirstProjectTeam02.repository.roles",
-                "com.example.baFirstProjectTeam02.repository.userPrincipal");
+                "com.example.baFirstProjectTeam02.repository.userPrincipal",
+                "com.example.baFirstProjectTeam02.repository.posts");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

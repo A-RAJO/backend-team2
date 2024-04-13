@@ -6,6 +6,7 @@ import com.example.baFirstProjectTeam02.web.dto.PostDto;
 import com.example.baFirstProjectTeam02.web.dto.Postbody;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +17,6 @@ import java.util.List;
 @Slf4j
 public class PostController {
     private final PostService postService;
-
-
     //모든 게시판 조회
     @GetMapping("/posts")
     public List<PostDto> PostList(){
@@ -31,11 +30,6 @@ public class PostController {
         return postService.findByTitle(title);
     }
 
-    //이메일로 게시물 조회
-    @GetMapping("/posts/search")
-    public List<PostDto> findPostByEmail(@RequestParam("email") String email){
-        return postService.findByEmail(email);
-    }
 
     //게시물 등록
     @PostMapping("/posts")

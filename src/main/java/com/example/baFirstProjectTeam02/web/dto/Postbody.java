@@ -10,6 +10,6 @@ import java.sql.Blob;
 public class Postbody {
     private int userId;
     private String postTitle;
-    private String post_contents;
-    private Blob image;
+    private String postContents;
+//    private Blob image;
 }
