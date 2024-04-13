@@ -1,9 +1,9 @@
 package com.example.baFirstProjectTeam02.repository.posts;
 
+import com.example.baFirstProjectTeam02.web.dto.Postbody;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 @Getter
@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 @Builder
 @Entity
 @Table(name = "item")
-public class PostEntity {
+public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "post_num", nullable = false)
@@ -39,4 +39,6 @@ public class PostEntity {
     @Column(name = "updated_at", nullable = false)
     private Timestamp updatedAt;
 
+    public void setPostBody(Postbody postbody) {
+    }
 }
