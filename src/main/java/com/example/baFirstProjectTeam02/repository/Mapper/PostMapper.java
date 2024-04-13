@@ -13,10 +13,5 @@ public interface PostMapper {
 
     // 메소드
     PostDto postEntityToPostDto(Posts postEntity);
-
-    @Mapping(target = "cpu", source = "itemBody.spec.cpu")
-    @Mapping(target = "capacity", source = "itemBody.spec.capacity")
-    @Mapping(target = "storeSales", ignore = true)
-    @Mapping(target = "stock", expression = "java(0)")
     Posts emailAndPostbodyToPostEntity(String email, Postbody postBody);
 }

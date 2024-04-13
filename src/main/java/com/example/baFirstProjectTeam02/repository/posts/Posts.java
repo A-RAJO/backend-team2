@@ -30,8 +30,8 @@ public class Posts {
     @Column(name = "post_contents", nullable = false)
     private String post_contents;
 
-    @Column(name = "image", nullable = false)
-    private PostImage image;
+//    @Column(name = "image", nullable = false)
+//    private String image;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp createdAt;

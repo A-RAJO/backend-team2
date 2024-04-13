@@ -28,14 +28,15 @@ public class PostService {
         return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
     }
     public static List<PostDto> findPostByEmail(String email) {
+        return null;
     }
 
     public static PostDto findPostByTitle(String title) {
-
+        return null;
     }
 
-    public static void deletePost(int postNum) {
-        PostRepository.deleteByPostNum(postNum);
+    public void deletePost(int postNum) {
+        PostRepository.deletePost(postNum);
     }
 
     public Integer savePost(Postbody postbody) {
@@ -51,8 +52,8 @@ public class PostService {
 
     @Transactional
     public PostDto updatePost(int postNum, Postbody postbody) {
-        Posts postEntityUpdated= (Posts) postRepository.findByPostNum(postNum)
-                .orElseThrow(() -> new NotFoundException("해당 ID: " + postNum + "의 Item을 찾을 수 없습니다."));
+        Posts postEntityUpdated= postRepository.findByPostNum(postNum);
+                //.orElseThrow(() -> new NotFoundException("해당 ID: " + postNum + "의 Item을 찾을 수 없습니다."));
         postEntityUpdated.setPostBody(postbody);
         return PostMapper.INSTANCE.postEntityToPostDto(postEntityUpdated);
     }
