@@ -13,8 +13,8 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 public class PostDto {
-    private int postNum;
-    private int userId;
+    private Integer postNum;
+    private Integer userId;
     private String postTitle;
     private String postContents;
 //    private PostImage image;

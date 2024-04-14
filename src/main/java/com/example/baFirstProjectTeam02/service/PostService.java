@@ -41,7 +41,9 @@ public class PostService {
     public Integer savePost(Postbody postbody) {
         Posts postEntity=PostMapper.INSTANCE.postbodyToPostEntity(postbody);
         Posts postEntityCreated;
+        System.out.println(postEntity);
         try {
+
             postEntityCreated = postRepository.save(postEntity);
         } catch (RuntimeException exception){
             throw new NotAcceptException("Post을 저장하는 도중에 Error 가 발생하였습니다.");

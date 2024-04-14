@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Postbody {
-    private int userId;
+    private Integer userId;
     private String postTitle;
     private String postContents;
 //    private Blob image;
