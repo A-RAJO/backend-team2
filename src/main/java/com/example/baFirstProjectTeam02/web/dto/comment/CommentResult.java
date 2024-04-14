@@ -4,14 +4,18 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CommentResult {
     private Integer userId;
-    private String commentContent;
-    private String createAt;
+    private Integer postNum;
+    private String commentContents;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

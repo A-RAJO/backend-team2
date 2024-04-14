@@ -11,4 +11,5 @@ import lombok.*;
 public class CommentRequest {
     private Integer userId;
     private Integer postNum;
+    private String commentContents;
 }

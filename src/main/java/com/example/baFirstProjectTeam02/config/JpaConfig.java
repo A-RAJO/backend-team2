@@ -20,7 +20,8 @@ import java.util.Map;
         basePackages = {"com.example.baFirstProjectTeam02.repository.users",
                 "com.example.baFirstProjectTeam02.repository.roles",
                 "com.example.baFirstProjectTeam02.repository.userPrincipal",
-                "com.example.baFirstProjectTeam02.repository.posts"},
+                "com.example.baFirstProjectTeam02.repository.posts",
+                "com.example.baFirstProjectTeam02.repository.comment"},
         entityManagerFactoryRef = "entityMangerFactoryBean",
         transactionManagerRef = "tmJpa"
 )
@@ -33,7 +34,8 @@ public class JpaConfig {
         em.setPackagesToScan("com.example.baFirstProjectTeam02.repository.users",
                 "com.example.baFirstProjectTeam02.repository.roles",
                 "com.example.baFirstProjectTeam02.repository.userPrincipal",
-                "com.example.baFirstProjectTeam02.repository.posts");
+                "com.example.baFirstProjectTeam02.repository.posts",
+                "com.example.baFirstProjectTeam02.repository.comment");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
