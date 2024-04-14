@@ -52,6 +52,7 @@ public class PostService {
         return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
     }
 
+    @Transactional
     public void deletePost(int postNum) {
         postRepository.deleteByPostNum(postNum);
     }

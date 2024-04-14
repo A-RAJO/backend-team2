@@ -35,15 +35,15 @@ public class PostController {
     }
 
     //게시물 번호로 게시물 삭제
-    @DeleteMapping("/{post_num}")
-    public String deletePostByPostNum(@PathVariable int postNum){
+    @DeleteMapping("delete/{post_num}")
+    public String deletePostByPostNum(@PathVariable("post_num") int postNum){
         postService.deletePost(postNum);
         return postNum+"번 게시물이 삭제되었습니다.";
     }
 
     //게시물 번호로 게시물 수정
-    @PutMapping("/{post_num}")
-    public PostDto updatePost(@PathVariable int postNum, @RequestBody Postbody postbody){
+    @PutMapping("update/{post_num}")
+    public PostDto updatePost(@PathVariable("post_num") int postNum, @RequestBody Postbody postbody){
         return postService.updatePost(postNum,postbody);
     }
 }
