@@ -36,11 +36,11 @@ public class Posts {
     private String postContents;
 
     @CreatedBy
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @LastModifiedBy
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public void setPostbody(Postbody postbody) {

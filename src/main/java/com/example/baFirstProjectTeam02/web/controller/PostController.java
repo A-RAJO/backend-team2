@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/api")
 @RequiredArgsConstructor
-@Slf4j
 public class PostController {
     private final PostService postService;
     //모든 게시판 조회
@@ -34,8 +33,8 @@ public class PostController {
     //게시물 등록
     @PostMapping("/posts/register")
     public String registerPost(@RequestBody Postbody postbody){
-        Integer postNum=postService.savePost(postbody);
-        return postNum+"번 게시물이 등록되었습니다.";
+        postService.savePost(postbody);
+        return "게시물이 등록되었습니다.";
     }
 
     //게시물 번호로 게시물 삭제
