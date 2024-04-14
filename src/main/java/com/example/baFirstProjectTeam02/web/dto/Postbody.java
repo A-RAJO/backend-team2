@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Blob;
-import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -16,5 +14,5 @@ public class Postbody {
     private Integer userId;
     private String postTitle;
     private String postContents;
-//    private Blob image;
+
 }

@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -34,16 +35,13 @@ public class Posts {
     @Column(name = "post_contents", nullable = false)
     private String postContents;
 
-//    @Column(name = "image", nullable = false)
-//    private String image;
-
     @CreatedBy
     @Column(name = "created_at", nullable = false)
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedBy
     @Column(name = "updated_at", nullable = false)
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     public void setPostbody(Postbody postbody) {
         this.userId=postbody.getUserId();
