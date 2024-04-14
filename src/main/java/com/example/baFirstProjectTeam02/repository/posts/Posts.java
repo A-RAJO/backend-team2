@@ -44,7 +44,6 @@ public class Posts {
     private LocalDateTime updatedAt;
 
     public void setPostbody(Postbody postbody) {
-        this.userId=postbody.getUserId();
         this.postTitle=postbody.getPostTitle();
         this.postContents=postbody.getPostContents();
     }

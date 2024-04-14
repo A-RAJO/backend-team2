@@ -12,40 +12,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/api")
+@RequestMapping("/v1/api/posts")
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
     //모든 게시판 조회
-    @GetMapping("/posts")
+    @GetMapping("/list")
     public List<PostDto> PostList(){
         List<PostDto> posts=postService.findAllPost();
         return posts;
     }
 
     //제목으로 게시물 조회
-    @GetMapping("/posts/search")
+    @GetMapping("/search")
     public List<PostDto> findPostByTitle(@RequestParam("title") String title){
         return postService.findByTitle(title);
     }
 
 
     //게시물 등록
-    @PostMapping("/posts/register")
+    @PostMapping("/register")
     public String registerPost(@RequestBody Postbody postbody){
         postService.savePost(postbody);
         return "게시물이 등록되었습니다.";
     }
 
     //게시물 번호로 게시물 삭제
-    @DeleteMapping("/posts/{post_num}")
+    @DeleteMapping("/{post_num}")
     public String deletePostVyPostNum(@PathVariable int postNum){
         postService.deletePost(postNum);
         return postNum+"번 게시물이 삭제되었습니다.";
     }
 
     //게시물 번호로 게시물 수정
-    @PutMapping("/posts/{post_num}")
+    @PutMapping("/{post_num}")
     public PostDto updatePost(@PathVariable int postNum, @RequestBody Postbody postbody){
         return postService.updatePost(postNum,postbody);
     }

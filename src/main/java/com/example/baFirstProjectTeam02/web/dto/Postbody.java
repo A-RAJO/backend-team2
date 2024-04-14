@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 
 
 @Getter
@@ -13,11 +12,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Postbody {
-    private Integer postNum;
-    private Integer userId;
     private String postTitle;
     private String postContents;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
 }
