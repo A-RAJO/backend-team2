@@ -26,6 +26,7 @@ public class Posts {
     @Column(name = "post_num", nullable = false)
     private Integer postNum;
 
+    @JoinColumn(name = "user_id")
     @Column(name = "user_id", nullable = false)
     private Integer userId;
 

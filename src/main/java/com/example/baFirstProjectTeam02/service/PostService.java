@@ -31,9 +31,12 @@ public class PostService {
     }
 
 
+    @Transactional
     public Integer savePost(Postbody postbody) {
+        System.out.println(postbody);
         Posts postEntity = PostMapper.INSTANCE.postbodyToPostEntity(postbody);
         Posts postEntityCreated;
+        System.out.println(postEntity);
         try {
             postEntityCreated=postRepository.save(postEntity);
         } catch (RuntimeException e) {
@@ -50,7 +53,7 @@ public class PostService {
     }
 
     public void deletePost(int postNum) {
-        PostRepository.deletePost(postNum);
+        postRepository.deleteByPostNum(postNum);
     }
 
     @Transactional

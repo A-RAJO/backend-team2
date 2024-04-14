@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping("/v1/api/posts")
 @RequiredArgsConstructor
 public class PostController {
+
     private final PostService postService;
     //모든 게시판 조회
     @GetMapping("/list")
@@ -35,7 +36,7 @@ public class PostController {
 
     //게시물 번호로 게시물 삭제
     @DeleteMapping("/{post_num}")
-    public String deletePostVyPostNum(@PathVariable int postNum){
+    public String deletePostByPostNum(@PathVariable int postNum){
         postService.deletePost(postNum);
         return postNum+"번 게시물이 삭제되었습니다.";
     }
