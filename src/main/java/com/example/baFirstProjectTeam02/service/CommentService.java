@@ -18,6 +18,7 @@
         private final CommentRepository commentRepository;
 
         public CommentResult addComment(CommentRequest commentRequest) {
+
             CommentEntity commentEntity = CommentMapper.INSTANCE.commentRequestToCommentEntity(commentRequest);
 
             commentEntity.setCreatedAt(LocalDateTime.now()); // 현재 시간으로 설정
