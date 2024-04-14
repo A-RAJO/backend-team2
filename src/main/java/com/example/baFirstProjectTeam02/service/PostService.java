@@ -43,9 +43,9 @@ public class PostService {
         Posts postEntityCreated;
         System.out.println(postEntity);
         try {
-
             postEntityCreated = postRepository.save(postEntity);
-        } catch (RuntimeException exception){
+        } catch (RuntimeException e){
+            e.printStackTrace();
             throw new NotAcceptException("Post을 저장하는 도중에 Error 가 발생하였습니다.");
         }
         return postEntityCreated.getPostNum();
