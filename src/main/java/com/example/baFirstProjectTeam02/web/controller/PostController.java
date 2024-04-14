@@ -1,12 +1,9 @@
 package com.example.baFirstProjectTeam02.web.controller;
 
-import com.example.baFirstProjectTeam02.repository.posts.Posts;
 import com.example.baFirstProjectTeam02.service.PostService;
 import com.example.baFirstProjectTeam02.web.dto.PostDto;
 import com.example.baFirstProjectTeam02.web.dto.Postbody;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +16,7 @@ public class PostController {
     //모든 게시판 조회
     @GetMapping("/list")
     public List<PostDto> PostList(){
-        List<PostDto> posts=postService.findAllPost();
-        return posts;
+        return postService.findAllPost();
     }
 
     //제목으로 게시물 조회

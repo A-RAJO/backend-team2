@@ -30,6 +30,20 @@ public class PostService {
         return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
     }
 
+
+    public Integer savePost(Postbody postbody) {
+        Posts postEntity = PostMapper.INSTANCE.postbodyToPostEntity(postbody);
+        Posts postEntityCreated;
+        try {
+            postEntityCreated=postRepository.save(postEntity);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new NotAcceptException("Post을 저장하는 도중에 Error 가 발생하였습니다.");
+        }
+        return postEntityCreated.getPostNum();
+    }
+
+
     public List<PostDto> findByTitle(String title) {
         List<Posts> postEntity=postRepository.findByPostTitle(title);
         return postEntity.stream().map(PostMapper.INSTANCE::postEntityToPostDto).collect(Collectors.toList());
@@ -37,19 +51,6 @@ public class PostService {
 
     public void deletePost(int postNum) {
         PostRepository.deletePost(postNum);
-    }
-
-    public Integer savePost(Postbody postbody) {
-        Posts postEntity=PostMapper.INSTANCE.postbodyToPostEntity(postbody);
-        Posts postEntityCreated;
-        System.out.println(postEntity);
-        try {
-            postEntityCreated = postRepository.save(postEntity);
-        } catch (RuntimeException e){
-            e.printStackTrace();
-            throw new NotAcceptException("Post을 저장하는 도중에 Error 가 발생하였습니다.");
-        }
-        return postEntityCreated.getPostNum();
     }
 
     @Transactional
