@@ -29,10 +29,10 @@ public class Posts {
     @JoinColumn(name = "user_id")
     private UserEntity userId;
 
-    @Column(name = "post_title", nullable = false)
+    @Column(name = "post_title", nullable = false, length = 30)
     private String postTitle;
 
-    @Column(name = "post_contents", nullable = false)
+    @Column(name = "post_contents", nullable = false,length = 2000)
     private String postContents;
 
     @CreatedBy

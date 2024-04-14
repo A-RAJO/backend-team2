@@ -9,8 +9,6 @@ import com.example.baFirstProjectTeam02.web.dto.PostDto;
 import com.example.baFirstProjectTeam02.web.dto.Postbody;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +16,6 @@ import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
-@Slf4j
 @Service
 public class PostService {
 
