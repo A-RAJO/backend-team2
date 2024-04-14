@@ -1,7 +1,9 @@
 package com.example.baFirstProjectTeam02.config;
 
+import com.example.baFirstProjectTeam02.repository.posts.PostRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -46,6 +48,7 @@ public class JpaConfig {
         return em;
     }
 
+    @Primary
     @Bean(name = "tmJpa")
     public PlatformTransactionManager transactionManager(DataSource dataSource){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
