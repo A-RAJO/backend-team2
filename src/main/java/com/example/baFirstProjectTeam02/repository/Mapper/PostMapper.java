@@ -4,7 +4,6 @@ import com.example.baFirstProjectTeam02.repository.posts.Posts;
 import com.example.baFirstProjectTeam02.web.dto.PostDto;
 import com.example.baFirstProjectTeam02.web.dto.Postbody;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper

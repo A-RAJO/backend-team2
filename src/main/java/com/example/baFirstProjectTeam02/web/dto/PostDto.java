@@ -18,7 +18,6 @@ public class PostDto {
     private Integer userId;
     private String postTitle;
     private String postContents;
-//    private PostImage image;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
