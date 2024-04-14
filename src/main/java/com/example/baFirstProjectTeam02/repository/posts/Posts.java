@@ -1,13 +1,12 @@
 package com.example.baFirstProjectTeam02.repository.posts;
 
+import com.example.baFirstProjectTeam02.repository.users.UserEntity;
 import com.example.baFirstProjectTeam02.web.dto.Postbody;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,16 +18,16 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @Entity
-@Table(name = "item")
+@Table(name = "posts")
 public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_num", nullable = false)
     private Integer postNum;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    private UserEntity userId;
 
     @Column(name = "post_title", nullable = false)
     private String postTitle;
@@ -43,6 +42,7 @@ public class Posts {
     @LastModifiedBy
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
 
     public void setPostbody(Postbody postbody) {
         this.postTitle=postbody.getPostTitle();
