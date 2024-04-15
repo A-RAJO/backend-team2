@@ -3,6 +3,8 @@ package com.example.baFirstProjectTeam02.service;
 import com.example.baFirstProjectTeam02.repository.Mapper.PostMapper;
 import com.example.baFirstProjectTeam02.repository.posts.PostRepository;
 import com.example.baFirstProjectTeam02.repository.posts.Posts;
+import com.example.baFirstProjectTeam02.repository.users.UserEntity;
+import com.example.baFirstProjectTeam02.repository.users.UserRepository;
 import com.example.baFirstProjectTeam02.service.exceptions.NotAcceptException;
 import com.example.baFirstProjectTeam02.service.exceptions.NotFoundException;
 import com.example.baFirstProjectTeam02.web.dto.PostDto;
@@ -30,7 +32,9 @@ public class PostService {
 
     @Transactional
     public Integer savePost(Postbody postbody) {
+        UserEntity loginUser=postbody.getUserId();
         Posts postEntity = PostMapper.INSTANCE.postbodyToPostEntity(postbody);
+        postEntity.setUserId(loginUser);
         Posts postEntityCreated;
         try {
             postEntityCreated=postRepository.save(postEntity);
