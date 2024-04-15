@@ -26,7 +26,7 @@ public class Posts {
     @Column(name = "post_num", nullable = false)
     private Integer postNum;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserEntity userId;
 
