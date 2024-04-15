@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -60,19 +61,24 @@ public class LikeService {
         likeRepository.save(like);
 
         int likeCount = likeRepository.countByPostNum(like.getPostNum());
-        PostLikeRequest postLikeRequest = PostLikeRequest.builder()
-                .posts(posts)
-                .likeRequest(likeRequest)
-                .like(likeCount)
-                .build();
-        return postLikeRequest;
+
+        String responseMessage = "게시물에 좋아요를 추가했습니다. 현재 좋아요 수: " + likeCount;
+
+        return ResponseEntity.ok()
+                .body(PostLikeRequest.builder()
+                        .posts(posts)
+                        .likeRequest(likeRequest)
+                        .like(likeCount)
+                        .build()).getBody();
     }
-    public void unlikePost(int userId, int postNum) throws IOException {
+    public String unlikePost(int userId, int postNum) {
         Optional<Like> likeOpt = likeRepository.findByUserIdAndPostNum(userId, postNum);
         if (!likeOpt.isPresent()){
-            throw new IOException("좋아요 정보를 찾을 수 없습니다.");
+            return "해당 유저의 좋아요 정보를 찾을 수 없습니다.";
         }
         likeRepository.delete(likeOpt.get());
+        int likeCount = likeRepository.countByPostNum(postNum);
+        return "게시물의 좋아요를 취소했습니다. 현재 좋아요 수: " + likeCount;
     }
     public int getLikeCount(Posts postNum){
         return likeRepository.countByPostNum(postNum.getPostNum());

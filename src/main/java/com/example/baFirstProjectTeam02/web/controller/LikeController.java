@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -20,16 +22,23 @@ public class LikeController {
     @PostMapping("/like")
     public ResponseEntity<PostLikeRequest> addLike(@RequestBody LikeRequest likeRequest){
         PostLikeRequest result = likeService.addLike(likeRequest);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        String responseMessage = "게시물에 좋아요를 추가했습니다. 현재 좋아요 수: " + result.getLike();
+        return ResponseEntity.ok()
+                .header("Message", responseMessage)
+                .body(result);
     }
 
     @PostMapping("/unlike")
-    public ResponseEntity<?> unlikePost(@RequestParam int userId, @RequestParam int postNum){
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> unlikePost(@RequestParam int userId, @RequestParam int postNum){
+        String responseMessage = likeService.unlikePost(userId, postNum);
+        return ResponseEntity.ok()
+                .header("Message", responseMessage)
+                .body(responseMessage);
     }
 
     @PostMapping("/count")
-    public ResponseEntity<?> getLikeCount(@RequestParam Posts postNum){
-        return ResponseEntity.ok(likeService.getLikeCount(postNum));
+    public ResponseEntity<Integer> getLikeCount(@RequestParam Posts postNum){
+        int likeCount = likeService.getLikeCount(postNum);
+        return ResponseEntity.ok(likeCount);
     }
 }

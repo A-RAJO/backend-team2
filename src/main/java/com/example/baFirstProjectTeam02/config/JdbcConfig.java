@@ -1,3 +1,4 @@
+/*
 package com.example.baFirstProjectTeam02.config;
 
 import com.example.baFirstProjectTeam02.properties.DataSourceProperties;
@@ -35,3 +36,4 @@ public class JdbcConfig {
     @Bean(name = "tm")
     public PlatformTransactionManager transactionManager1() { return new DataSourceTransactionManager(dataSource()); }
 }
+*/
