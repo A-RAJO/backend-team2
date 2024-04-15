@@ -5,7 +5,9 @@ import com.example.baFirstProjectTeam02.web.dto.Postbody;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
@@ -13,9 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "postNum")
 @EntityListeners(AuditingEntityListener.class)
-@ToString
 @Builder
 @Entity
 @Table(name = "posts")
@@ -36,16 +36,17 @@ public class Posts {
     @Column(name = "post_contents", nullable = false,length = 2000)
     private String postContents;
 
-    @CreatedBy
+    @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @LastModifiedBy
+    @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
 
     public void setPostbody(Postbody postbody) {
+        this.userId=postbody.getUserId();
         this.postTitle=postbody.getPostTitle();
         this.postContents=postbody.getPostContents();
     }
