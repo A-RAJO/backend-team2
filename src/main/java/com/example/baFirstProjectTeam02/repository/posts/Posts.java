@@ -25,9 +25,8 @@ public class Posts {
     @Column(name = "post_num", nullable = false)
     private Integer postNum;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private UserEntity userId;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @Column(name = "post_title", nullable = false)
     private String postTitle;

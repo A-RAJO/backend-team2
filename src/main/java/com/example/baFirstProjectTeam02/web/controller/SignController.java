@@ -3,6 +3,7 @@ package com.example.baFirstProjectTeam02.web.controller;
 import com.example.baFirstProjectTeam02.service.AuthService;
 import com.example.baFirstProjectTeam02.web.dto.auth.Login;
 import com.example.baFirstProjectTeam02.web.dto.auth.SignUp;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

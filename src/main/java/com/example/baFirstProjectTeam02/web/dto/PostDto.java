@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 public class PostDto {
     private Integer postNum;
-    private UserEntity userId;
+    private Integer userId;
     private String postTitle;
     private String postContents;
     private LocalDateTime createdAt;
